@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="Pt-Br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Caixa Eletrônico</title>
+
+	<script>
+		var nome = prompt("Seja bem-vindo ao Unibanco \ninforme seu nome:");
+
+		nome = String(nome);
+		 
+		alert("Olá, " + nome + " é um prazer ter você aqui por aqui! ");
+		        
+		
+		var saldo = 100.5; //Variavel Global
+		saldo = parseFloat(saldo);
+
+		var senha = 3589
+		
+
+		function inicio() {
+			//ESCOPO
+			//Variavel Local
+			var escolha = parseInt(prompt("Selecione Um opção: \n1.) Saldo \n2.) Extrato \n3.) Saque \n4.) Depósito \n5.) Tranferência \n6.) sair"));
+				
+			switch (escolha) {
+		
+			 case 1:
+				ver_saldo();
+				break;
+				
+			 case 2:
+				ver_extrato();
+
+
+			 case 3:
+			 	fazer_saque();
+				break;
+
+			 case 4:
+			 	fazer_deposito();
+				break;
+				
+				
+			 case 5:
+
+
+			 case 6:
+				sair();
+				break;
+
+			
+			default:
+				erro();
+			}
+		}
+
+		function ver_saldo() {
+			senha = prompt("Digite sua senha:");
+			if (senha !== senha) {
+				alert("Senha incorreta. Tente novamente.");
+				return;
+			
+			}
+			alert('Seu saldo atual é: ' + saldo.toFixed(2));
+			
+			sair();
+		}
+		inicio()
+
+		function ver_extrato(){
+			senha = prompt("Digite sua senha:");
+			if (senha !== senha) {
+				alert("Senha incorreta. Tente novamente.");
+				return;
+			
+			}
+
+			alert("            Unibanco\n   \nData      Histórico       valor \n14/08     Petz               50,00-\n01/09     Netflix           19.99-\n09/09     Saraiva           150.00-\n05/09     depósito        200.00-\n\n11/09      Saldo:            " +saldo);
+		    sair()
+
+		}
+		inicio()
+
+
+
+		function fazer_saque() {
+			if (senha !== senha) {
+				alert("Senha incorreta. Tente novamente.");
+				return;
+			
+			}
+
+			var saque = parseFloat(prompt('Qual o valor para saque?'));
+
+			if (isNaN(saque) || saque <= 0 || saque > saldo) {
+				alert('Operação não autorizada. Por favor, informe um valor de saque válido e maior que zero.\nSaldo atual: R$' + saldo.toFixed(2));
+			} else {
+				saldo -= saque; 
+				ver_saldo();
+			}
+		}
+
+		inicio();
+
+
+
+		function fazer_deposito() {
+			if (senha !== senha) {
+				alert("Senha incorreta. Tente novamente.");
+				return;
+			
+			}
+			
+			var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+			// Not a Number --> Isso é um não-número?
+			if (isNaN(deposito) || deposito <= 0 ) {
+				alert('Operação não autorizada!');
+				fazer_deposito();
+			} else {
+				saldo += deposito;
+				//saldo = saldo + deposito;
+				ver_saldo();
+			}
+		
+		}
+		inicio();
+
+
+
+		function fazer_transferencia() {
+			if (senha !== senha) {
+				alert("Senha incorreta. Tente novamente.");
+				return;
+			
+			}
+			
+			while (true) {
+				var conta_transferencia = parseInt(prompt("Informe o número da conta de destino:"));
+
+				if (isNaN(conta_transferencia) || conta_transferencia === '') {
+				alert("Número da conta inválida! Por favor, informe um número de conta válido.");
+				} else {
+				var valor_transferencia = parseFloat(prompt("Informe o valor da transferência:"));
+
+					if (isNaN(valor_transferencia) || valor_transferencia <= 0 || valor_transferencia > saldo) {
+						alert("Operação não autorizada. Verifique o número da conta e o valor da transferência.");
+					} else {
+						saldo -= valor_transferencia;
+						alert("Transferência de R$" + valor_transferencia.toFixed(2) + " realizada para a conta " + conta_transferencia + "\nSaldo atual: R$" + saldo.toFixed(2));
+						inicio();
+						break;
+					}
+				}
+			}
+		}
+		
+		function erro() {
+			alert('Por favor, informe um número entre 1 e 6.');
+			inicio();
+		}
+
+		function sair() {
+			var confirma = confirm('Você deseja sair?');
+			if (confirma) {
+				alert(nome +", foi um prazer ter você por aqui!");
+				alert("Unibanco agradece");
+				window.close();
+				
+			} else {
+				alert("Início")
+				inicio();
+			}
+		}
+		inicio();
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
